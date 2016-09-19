@@ -1,4 +1,6 @@
 package test.bean;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 	@Autowired 		//컨트롤러에 있는 sqlMapClientTemplate 객체가 자동으로 sqlMap으로 들어오게됨
-	private SqlMapClientTemplate sqlMap;	
+	private Date day;
+	//private SqlMapClientTemplate sqlMap;	
 	
 	@RequestMapping("/hello.nhn")
 	public String hello(){
 		System.out.println("hello");
+		System.out.println(day);
 		return "/0919/hello.jsp";
 	}
 	
@@ -22,6 +26,7 @@ public class HelloController {
 		System.out.println(dto.getId());
 		System.out.println(dto.getPw());
 		
-		return "/view/index.jsp";
+		request.setAttribute("dto", dto);
+		return "/0919/helloPro.jsp";
 	}
 }
